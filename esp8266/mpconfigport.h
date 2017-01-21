@@ -73,6 +73,7 @@
 #define MICROPY_PY_MACHINE_I2C      (1)
 #define MICROPY_PY_MACHINE_SPI      (1)
 #define MICROPY_PY_MACHINE_SPI_MAKE_NEW machine_hspi_make_new
+#define MICROPY_PY_HELLO            (1)
 #define MICROPY_PY_WEBSOCKET        (1)
 #define MICROPY_PY_WEBREPL          (1)
 #define MICROPY_PY_WEBREPL_DELAY    (20)
@@ -151,6 +152,7 @@ extern const struct _mp_obj_module_t utime_module;
 extern const struct _mp_obj_module_t uos_module;
 extern const struct _mp_obj_module_t mp_module_lwip;
 extern const struct _mp_obj_module_t mp_module_machine;
+extern const struct _mp_obj_module_t mp_module_hello;
 extern const struct _mp_obj_module_t onewire_module;
 
 #define MICROPY_PORT_BUILTIN_MODULES \
@@ -162,6 +164,7 @@ extern const struct _mp_obj_module_t onewire_module;
     { MP_OBJ_NEW_QSTR(MP_QSTR_utime), (mp_obj_t)&utime_module }, \
     { MP_OBJ_NEW_QSTR(MP_QSTR_uos), (mp_obj_t)&uos_module }, \
     { MP_OBJ_NEW_QSTR(MP_QSTR_machine), (mp_obj_t)&mp_module_machine }, \
+    { MP_OBJ_NEW_QSTR(MP_QSTR_hello), (mp_obj_t)&mp_module_hello }, \
     { MP_OBJ_NEW_QSTR(MP_QSTR__onewire), (mp_obj_t)&onewire_module }, \
 
 #define MICROPY_PORT_BUILTIN_MODULE_WEAK_LINKS \
