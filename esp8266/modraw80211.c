@@ -36,9 +36,9 @@
 #if MICROPY_PY_HELLO
 
 STATIC mp_obj_t fun_wifi_send_pkt_freedom(mp_obj_t packet_buffer_obj) {
-    mp_uint_t hlen;
-    const char* packet_buffer = mp_obj_str_get_data(packet_buffer_obj, &hlen);
-    return mp_obj_new_int(wifi_send_pkt_freedom((uint8_t*)packet_buffer, hlen, 0));
+    mp_buffer_info_t src;
+    mp_get_buffer_raise(packet_buffer_obj, &src, MP_BUFFER_READ);
+    return mp_obj_new_int(wifi_send_pkt_freedom((uint8_t*)src.buf, src.len, 0));
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(fun_wifi_send_pkt_freedom_obj, fun_wifi_send_pkt_freedom);
 
