@@ -31,17 +31,27 @@
 #include "py/obj.h"
 #include "py/runtime.h"
 
+#include "user_interface.h"
+
 #if MICROPY_PY_HELLO
 
-STATIC const mp_rom_map_elem_t hello_module_globals_table[] = {
-    { MP_ROM_QSTR(MP_QSTR___name__), MP_ROM_QSTR(MP_QSTR_oh_wow_it_works) },
+STATIC mp_obj_t fun_wifi_send_pkt_freedom(mp_obj_t packet_buffer_obj) {
+    mp_uint_t hlen;
+    const char* packet_buffer = mp_obj_str_get_data(packet_buffer_obj, &hlen);
+    return mp_obj_new_int(wifi_send_pkt_freedom((uint8_t*)packet_buffer, hlen, 0));
+}
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(fun_wifi_send_pkt_freedom_obj, fun_wifi_send_pkt_freedom);
+
+STATIC const mp_rom_map_elem_t raw80211_module_globals_table[] = {
+    { MP_ROM_QSTR(MP_QSTR___name__), MP_ROM_QSTR(MP_QSTR_raw80211) },
+    { MP_OBJ_NEW_QSTR(MP_QSTR_send_packet), (mp_obj_t)&fun_wifi_send_pkt_freedom_obj },
 };
 
-STATIC MP_DEFINE_CONST_DICT(hello_module_globals, hello_module_globals_table);
+STATIC MP_DEFINE_CONST_DICT(raw80211_module_globals, raw80211_module_globals_table);
 
-const mp_obj_module_t mp_module_hello = {
+const mp_obj_module_t mp_module_raw80211 = {
     .base = { &mp_type_module },
-    .globals = (mp_obj_dict_t*)&hello_module_globals,
+    .globals = (mp_obj_dict_t*)&raw80211_module_globals,
 };
 
 #endif // MICROPY_PY_HELLO
