@@ -42,9 +42,17 @@ STATIC mp_obj_t fun_wifi_send_pkt_freedom(mp_obj_t packet_buffer_obj) {
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(fun_wifi_send_pkt_freedom_obj, fun_wifi_send_pkt_freedom);
 
+STATIC mp_obj_t fun_wifi_promiscuous_enable(mp_obj_t mode_in) {
+    bool mxl = mp_obj_is_true(mode_in);
+    wifi_promiscuous_enable(mxl);
+    return mp_const_none;
+}
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(fun_wifi_promiscuous_enable_obj, fun_wifi_promiscuous_enable);
+
 STATIC const mp_rom_map_elem_t raw80211_module_globals_table[] = {
     { MP_ROM_QSTR(MP_QSTR___name__), MP_ROM_QSTR(MP_QSTR_raw80211) },
     { MP_OBJ_NEW_QSTR(MP_QSTR_send_packet), (mp_obj_t)&fun_wifi_send_pkt_freedom_obj },
+    { MP_OBJ_NEW_QSTR(MP_QSTR_set_promiscuous), (mp_obj_t)&fun_wifi_promiscuous_enable_obj },
 };
 
 STATIC MP_DEFINE_CONST_DICT(raw80211_module_globals, raw80211_module_globals_table);
